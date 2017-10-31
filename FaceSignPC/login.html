@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="hen">
+
+<head>
+    <title>面签</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/login.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="app" class="phone">
+        <div class="header">
+        </div>
+        <div class="container">
+            <div class="contant_top">
+                <div class="logo">
+                    <img src="img/logo.jpg">
+                    <span>H5 面签</span>
+                </div>
+                <div class="line">
+                    <span></span>
+                    <span id="line_gray"></span>
+                    <span></span>
+                </div>
+                <p class="subtitle">手机号 ：</p>
+                <div class="ipt">
+                    <span class="mobileIcon"></span>
+                    <input type="tel" placeholder="请输入您的手机号" id="phoneText" v-model="phoneText" @keydown="onlyNum" @focus="focusFun" maxlength="11" @keyup="vCode=false">
+                    <span id='clearPhoneText' class="wrong"></span>
+                </div>
+                <div id="msg" class="message" v-show="message">
+                    <img src="img/error.jpg">
+                    <span id="spanText" v-text="spanText"></span>
+                </div>
+                <!-- <p class="subtitle">验证码 ：</p>
+                <div class="ipt">
+                    <span class="codeIcon"></span>
+                    <el-input v-model='verificationCode' placeholder="请输入验证码">
+                        <button slot="append" id="sendVeriCode" @click="SubmitForm" :class="{ active1: disableVeriCode }">发送验证码</button>
+                    </el-input>
+                </div>
+
+                <div class="message" v-show="vCode">
+                    <img src="../../../assets/img/error.jpg">
+                    <span v-text="vCodeText"></span>
+                </div>
+                <div id="description" class="message" v-show="vResendCode">
+                    <a id="uncode">重新获取验证码
+							<span id="code">(
+								<i id="time">{{ counterDown }} &nbsp </i>)</span>
+						</a>
+                </div> -->
+                <button id="phoneNext" readonly="readonly" @click="codeNext" :disabled="disabled" :class="{ active: checkInput }">登录</button>
+            </div>
+            <div class="contant_bottom">
+                <p class="subtitle2">视频见证请准备 : </p>
+                <div class="elImg">
+                    <img class="rightImg" src="img/target.jpg">
+                    <span class="rightImgDes">&nbsp &nbsp二代身份证&nbsp </span>
+                </div>
+                <div class="elImg">
+                    <img class="rightImg" src="img/wifi.jpg">
+                    <span class="rightImgDes">WIFI或4G环境</span>
+                </div>
+                <p class="subtitle1">请在左侧输入框输入手机号码，以后您可以通过手机号登录、查询、修改资料</p>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <p>佰锐科技客服电话：020-85276986</p>
+                <p>©2012-2017 cloud.anychat.cn 版权所有 ICP证：粤ICP备13022410号-1</p>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        var spanText = document.getElementById('spanText');
+        var msg = document.getElementById('msg');
+        var clearPhoneText = document.getElementById('clearPhoneText');
+        document.getElementById('phoneNext').addEventListener('click', function() {
+            var phoneNum = document.getElementById('phoneText').value;
+            if (phoneNum == "") {
+                console.log('请输入手机号码');
+                console.log(phoneNum)
+                spanText.innerHTML = '请输入手机号码';
+                msg.style.display = 'block';
+            } else if (!(/^1[3|4|5|7|8]\d{9}$/.test(phoneNum))) {
+                spanText.innerHTML = '手机号码格式有误';
+                console.log('手机号码格式有误');
+                msg.style.display = 'block';
+            } else {
+                sessionStorage.setItem('phoneNum', phoneNum);
+                console.log(sessionStorage.getItem('phoneNum'))
+                window.location.href = 'upload.html'
+            }
+        })
+        document.getElementById('phoneText').addEventListener('keydown', function() {
+            msg.style.display = 'none';
+            if (!(event.keyCode == 46) && !(event.keyCode == 8) && !(event.keyCode == 37) && !(event.keyCode == 39))
+                if (!((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))
+                    event.returnValue = false;
+        })
+        clearPhoneText.addEventListener('click', function() {
+            document.getElementById('phoneText').value = ''
+        })
+    </script>
+
+</body>
+
+</html>

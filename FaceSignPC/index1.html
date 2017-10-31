@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="hen">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/upload.css" rel="stylesheet">
+
+
+    <script src="js/vue.min.js"></script>
+    <!-- <script src="js/anychat4html5.js"></script>
+    <script src="js/anychatobject.js"></script>
+    <script src="js/anychatsdk.js"></script>
+    <script src="js/anychatwebsdk.js"></script> -->
+
+</head>
+
+<body>
+    <!-- <div id="app">
+        {{ vResendCodeText }}
+    </div> -->
+    <div class="queue-container" v-loading="loading" element-loading-text="正在上传">
+        <div class="queue-header">
+            <img class="headerItem" src="img/logo.jpg" alt="" />
+            <span class="headerItem"></span>
+            <p class="headerItem">上传身份证</p>
+        </div>
+        <div class="queue-contents">
+            <p>
+                <span>
+				</span> 根据证监部门规定，开户需要上传有效期内身份证照片；该信息仅用于用户，请放心上传；拍照时请确保无反光，无遮挡，大小小于3M.
+            </p>
+            <ul>
+                <li>
+                    <!-- <img src="../../../assets/img/front.png" alt="" class="src" /> -->
+                    <img :src="img_wrap" class="img_wrap" @click="img_wrapFun">
+                    <input id="uploadFront" type="file" accept="image/*;" @change="selectFileImage">
+                </li>
+                <li>
+                    <!-- <img src="../../../assets/img/back.png" alt="" class="src" /> -->
+                    <img :src="img_wrapBk" class="img_wrapBk" @click="img_wrapBkFun">
+                    <input id="upload" type="file" accept="image/*" @change="selectFileImageBack">
+                </li>
+
+            </ul>
+
+            <button class="btn" id="uploadNext" @click="uploadNext">下一步</button>
+
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data() {
+                {
+                    return {
+                        img_wrap: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAeRJREFUOBGtlDsvBFEUx3d2djfiMbTsQ0NEwTaiQSGiRKWREDofgMJHEAqdSPSE0BC9SiEqWQWSzT4SzSbrsR7Fzo7fEXfNg9klbjI5j/s/vzn3MRMI1DFyudxaPp8/qEMa0GqJ0ul0QzgcvtM0zbAsqzMWi+X9aoJ+kzIXiUSmgLXhinZOcn6jJpDieRvA7tvSX64vMJvNdiAdV3I67c5kMkMq/s76AgHMUqTbC0Oh0II9dvvVQ0mlUs2GYbRWKpU2ij4swA3pylX0ZJrmNPn7crn8oOv6Y7FYfEgmk8+i07gOl0z24js6cUHqCU1uwbksefcfYPJCHeDFx5LpUq7DNp2GZeYPw2KrVuLx+Gp1D4GOATwEZvwGSFdv6Oe48PtSVwVKwCfWB/SEJyZxHaMAcBLYmdI6gJIEGg0Gg1e4tTqVZfawzBsFE+u5h4heyLfYRT/4LERrcs95gNwr+RI8nbsLJWa5I+68B8hbPSJ3kYq/03qAvHVYFShL7phni9hSuU/r0TqA8u9DOGArKvCZzXCKEzyL7O8o4Fs1T4ftHGKXisU6gOzfIKLIp2CnVCr1JhKJHVXAiZ4C7Ae8Ts6UPDfCsUUhJRYLrJGCa+xSNBo9ss8pH+gr/jK/tj0a2ETv2IZ35FSkS7HbzakAAAAASUVORK5CYII=',
+                        img_wrapBk: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAeRJREFUOBGtlDsvBFEUx3d2djfiMbTsQ0NEwTaiQSGiRKWREDofgMJHEAqdSPSE0BC9SiEqWQWSzT4SzSbrsR7Fzo7fEXfNg9klbjI5j/s/vzn3MRMI1DFyudxaPp8/qEMa0GqJ0ul0QzgcvtM0zbAsqzMWi+X9aoJ+kzIXiUSmgLXhinZOcn6jJpDieRvA7tvSX64vMJvNdiAdV3I67c5kMkMq/s76AgHMUqTbC0Oh0II9dvvVQ0mlUs2GYbRWKpU2ij4swA3pylX0ZJrmNPn7crn8oOv6Y7FYfEgmk8+i07gOl0z24js6cUHqCU1uwbksefcfYPJCHeDFx5LpUq7DNp2GZeYPw2KrVuLx+Gp1D4GOATwEZvwGSFdv6Oe48PtSVwVKwCfWB/SEJyZxHaMAcBLYmdI6gJIEGg0Gg1e4tTqVZfawzBsFE+u5h4heyLfYRT/4LERrcs95gNwr+RI8nbsLJWa5I+68B8hbPSJ3kYq/03qAvHVYFShL7phni9hSuU/r0TqA8u9DOGArKvCZzXCKEzyL7O8o4Fs1T4ftHGKXisU6gOzfIKLIp2CnVCr1JhKJHVXAiZ4C7Ae8Ts6UPDfCsUUhJRYLrJGCa+xSNBo9ss8pH+gr/jK/tj0a2ETv2IZ35FSkS7HbzakAAAAASUVORK5CYII=',
+                        tradeno: '2017103015224110400000000',
+                        phone: '13800138002',
+                        uploadSuccessFront: [],
+                        uploadSuccessBack: [],
+                        uploadNum: 0,
+                    };
+                }
+            },
+
+            methods: {
+                prevPage() {
+                    this.$router.push({
+                        path: '/verification'
+                    })
+                },
+                uploadNext() {
+                    console.log('se')
+                    this.uploadSuccessFront = [];
+                    this.uploadSuccessBack = [];
+                    this.uploadNum = 0;
+                    this.upload(this.img_wrap, this.tradeno, "front");
+                },
+                upload(file, tradeno, type) {
+                    var that = this;
+                    this.$http({
+                        method: 'POST',
+                        url: '/AnyChatFaceXClient/v1/client/trade/uploadBase64Image',
+                        body: {
+                            file: file,
+                            tradeno: tradeno,
+                            type: 1,
+                            cardside: type
+                        },
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        emulateJSON: true
+                    }).then(function(data) {
+                        if (data.body.errorcode == 0) {
+                            if (type == "front") {
+                                that.uploadSuccessFront.push(data.body.content);
+                                that.uploadNum++;
+                                that.upload(that.img_wrapBk, tradeno, "back");
+                            }
+                            if (type == "back") {
+                                that.uploadSuccessBack.push(data.body.content);
+                                that.uploadNum++;
+                            }
+                            if (that.uploadNum == 2) {
+                                that.$router.push({
+                                    path: '/PersonalInfopc',
+                                    query: {
+                                        uploadSuccessFront: that.uploadSuccessFront,
+                                        uploadSuccessBack: that.uploadSuccessBack
+                                    }
+                                })
+                            }
+                        } else {
+                            that.loading = false;
+                            that.$message.error(data.body.msg);
+                        }
+                    }, function(error) {
+                        that.loading = false
+                        that.$message.error('请求错误')
+                    })
+                },
+                img_wrapFun() {
+                    document.getElementById('uploadFront').click();
+                },
+                img_wrapBkFun() {
+                    document.getElementById('upload').click();
+                },
+                selectFileImage(e) {
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    this.createImage(files[0]);
+                },
+                createImage(file) {
+                    var image = new Image();
+                    var reader = new FileReader();
+                    var vm = this;
+
+                    reader.onload = function(e) {
+                        vm.img_wrap = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                },
+                selectFileImageBack(e) {
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    this.createImageBack(files[0]);
+                },
+                createImageBack(file) {
+                    var image = new Image();
+                    var reader = new FileReader();
+                    var vm = this;
+
+                    reader.onload = function(e) {
+                        vm.img_wrapBk = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                },
+            }
+        })
+    </script>
+
+</body>
+
+</html>

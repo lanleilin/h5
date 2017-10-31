@@ -1,0 +1,284 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 微软雅黑;
+    font-size: 12px;
+}
+
+input::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #8391A5;
+}
+
+input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #8391A5;
+}
+
+input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #8391A5;
+}
+
+input:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #8391A5;
+}
+
+.phone {
+    width: 100%;
+    height: 100%;
+    min-width: 640px;
+    min-height: 500px;
+    overflow: hidden;
+    background: darkgray;
+}
+
+.header {
+    width: 100%;
+    height: 50vh;
+    background: #00a0e9;
+}
+
+.footer {
+    width: 100%;
+    height: 50vh;
+    background: #FFFFFF;
+    text-align: center;
+}
+
+.footer>div {
+    width: 100%;
+    position: fixed;
+    bottom: 10px;
+}
+
+.footer>div>p {
+    color: #999999;
+    letter-spacing: 2px;
+    margin: 4px 0;
+}
+
+.container {
+    position: absolute;
+    width: 604px;
+    height: 286px;
+    margin: -143px 0 0 -302px !important;
+    min-width: 400px;
+    background: #FFFFFF;
+    border: 1px solid darkgray;
+    top: 50%;
+    left: 50%;
+    padding: 18px 56px !important;
+    -moz-box-shadow: 2px 2px 5px darkgray;
+    -webkit-box-shadow: 2px 2px 5px darkgray;
+    box-shadow: 2px 2px 5px darkgray;
+}
+
+.contant_top {
+    width: 50%;
+    /* height: 100%; */
+    height: 255px;
+    float: left;
+    border-right: 1px solid darkgray;
+    padding-right: 10%;
+}
+
+.contant_bottom {
+    width: 35%;
+    height: 100%;
+    float: right;
+}
+
+.logo {
+    height: 24px;
+    line-height: 24px;
+    padding: 5px;
+    color: #00a0e9;
+    padding-left: 36px;
+}
+
+.logo>img {
+    float: left;
+    height: 24px;
+    width: 108px;
+}
+
+.logo>span {
+    float: left;
+    font-size: 22px;
+}
+
+.line {
+    width: 100%;
+    background: lightgreen;
+    padding: 0;
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.line>span {
+    width: 32%;
+    float: left;
+    border: 1px solid lightgray;
+    margin: 0;
+    padding: 0;
+}
+
+#line_gray {
+    border: 1px solid #0098e7;
+    border-top: 2px solid #0098e7;
+    margin-top: -1px;
+}
+
+.subtitle {
+    margin: 8px 2px;
+    color: #666666;
+}
+
+.subtitle1 {
+    margin: 20px 0 30px 5px;
+    color: #666666;
+    letter-spacing: 1px;
+    font-size: 12px;
+    width: 204px;
+}
+
+.subtitle2 {
+    margin: 20px 0 30px 5px;
+    color: #666666;
+    font-size: 14px;
+}
+
+#phoneText {
+    border-top: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0px;
+    font-size: 15px;
+    border: 1px solid #8391a5;
+    box-sizing: border-box;
+    width: 100%;
+    line-height: 22px;
+    padding: 2%;
+    padding-left: 34px;
+    outline: none;
+    border: 1px solid #8391a5;
+    border-radius: 3px;
+}
+
+#phoneText:focus {
+    border-color: #00a0e9;
+}
+
+#phoneNext {
+    text-align: center;
+    background: darkgray;
+    color: #FFFFFF;
+    height: 40px;
+    line-height: 40px;
+    width: 302px;
+    top: 180px;
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    /* margin-top: 20px; */
+    position: absolute;
+    bottom: 18px;
+    cursor: not-allowed;
+}
+
+.wrong {
+    /* display: inline-block; */
+    float: right;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    margin-top: -34px;
+    z-index: 1;
+    background: url("../img/wrong.png") no-repeat;
+    background-size: 50%;
+    background-position: 50% 50%;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.mobileIcon,
+.codeIcon {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    float: left;
+    margin-bottom: -32px;
+    z-index: 1;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.mobileIcon {
+    background: url("../img/mobile.png") no-repeat;
+    background-size: 80%;
+    background-position: 50% 50%;
+}
+
+.codeIcon {
+    background: url("img/safe.png") no-repeat;
+    background-size: 60%;
+    background-position: 50% 50%;
+}
+
+.elImg {
+    margin-left: 16px;
+    display: inline-block;
+}
+
+.rightImgDes {
+    display: block;
+    margin: 5px 0;
+    font-weight: bold;
+    color: darkgray;
+}
+
+.rightImg {
+    /* width: 56%; */
+    width: 48px;
+    margin-left: 18px;
+}
+
+#sendVeriCode {
+    height: 36px;
+    margin-top: -1px;
+    width: 80px;
+    min-width: 76px;
+    border-left: 0;
+    background: #00a0e9;
+    color: white;
+    font-size: 12px;
+    padding: 0 2px;
+    outline: none;
+    border: none;
+}
+
+.active {
+    background: #00a0e9 !important;
+    cursor: default !important;
+}
+
+.active1 {
+    background: darkgray !important;
+    cursor: default !important;
+}
+
+.message>img,
+.message>span {
+    vertical-align: middle;
+}
+
+button {
+    cursor: pointer;
+}
+
+#msg {
+    display: none;
+}
